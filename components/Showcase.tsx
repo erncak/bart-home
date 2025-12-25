@@ -51,8 +51,12 @@ const Showcase: React.FC = () => {
 
   return (
     <>
-      <section id="showcase" className="py-32 px-6">
-        <div className="container mx-auto">
+      <section id="showcase" className="py-32 px-6 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-bart-black/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-bart-black/5 rounded-full blur-3xl"></div>
+
+        <div className="container mx-auto relative z-10">
           {/* Header */}
           <div className="flex flex-col items-center text-center mb-20">
             <Reveal>
@@ -62,93 +66,65 @@ const Showcase: React.FC = () => {
               <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-bart-black mb-6">
                 Yaşam <span className="italic text-gray-400">Alanları</span>
               </h2>
+              <div className="w-24 h-[1px] bg-bart-black/20 mx-auto mb-6"></div>
               <p className="font-sans text-lg text-bart-black/60 max-w-2xl mx-auto">
                 Her mekan bir hikaye anlatır. İşte bizim yarattığımız hikayelerden bazıları.
               </p>
             </Reveal>
           </div>
 
-          {/* Masonry-style Gallery */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8">
-            {/* Large featured image */}
-            <Reveal className="lg:col-span-7 lg:row-span-2">
-              <div
-                className="group relative overflow-hidden rounded-2xl cursor-pointer h-[400px] md:h-[500px] lg:h-full lg:min-h-[600px]"
-                onClick={() => openLightbox(0)}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-bart-black/70 via-bart-black/20 to-transparent z-10" />
-                <img
-                  src={SHOWCASE_IMAGES[0].src}
-                  alt={SHOWCASE_IMAGES[0].title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                {/* Content overlay - always visible on mobile */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-20">
-                  <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white/80 text-xs uppercase tracking-widest mb-3">
-                    Öne Çıkan
-                  </span>
-                  <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white mb-2">
-                    {SHOWCASE_IMAGES[0].title}
-                  </h3>
-                  <p className="font-sans text-white/70 text-sm md:text-base">
-                    {SHOWCASE_IMAGES[0].description}
-                  </p>
-                </div>
-                {/* Hover ring effect - desktop only */}
-                <div className="hidden md:block absolute inset-4 border border-white/0 group-hover:border-white/30 rounded-xl transition-all duration-500 z-10" />
-              </div>
-            </Reveal>
+          {/* Gallery Grid - Staggered layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {SHOWCASE_IMAGES.map((image, index) => (
+              <Reveal key={index} delay={index * 150} className={index === 1 ? 'md:mt-12' : ''}>
+                <div
+                  className="group relative overflow-hidden rounded-3xl cursor-pointer aspect-[3/4] shadow-lg hover:shadow-2xl transition-shadow duration-500"
+                  onClick={() => openLightbox(index)}
+                >
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-bart-black/80 via-bart-black/20 to-transparent z-10 opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
 
-            {/* Second image */}
-            <Reveal delay={150} className="lg:col-span-5">
-              <div
-                className="group relative overflow-hidden rounded-2xl cursor-pointer h-[280px] md:h-[350px] lg:h-[290px]"
-                onClick={() => openLightbox(1)}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-bart-black/70 via-bart-black/20 to-transparent z-10" />
-                <img
-                  src={SHOWCASE_IMAGES[1].src}
-                  alt={SHOWCASE_IMAGES[1].title}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ objectPosition: '50% 60%' }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-20">
-                  <h3 className="font-serif text-xl md:text-2xl text-white mb-1">
-                    {SHOWCASE_IMAGES[1].title}
-                  </h3>
-                  <p className="font-sans text-white/70 text-sm">
-                    {SHOWCASE_IMAGES[1].description}
-                  </p>
-                </div>
-                <div className="hidden md:block absolute inset-3 border border-white/0 group-hover:border-white/30 rounded-lg transition-all duration-500 z-10" />
-              </div>
-            </Reveal>
+                  {/* Image */}
+                  <img
+                    src={image.src}
+                    alt={image.title}
+                    className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110"
+                  />
 
-            {/* Third image */}
-            <Reveal delay={300} className="lg:col-span-5">
-              <div
-                className="group relative overflow-hidden rounded-2xl cursor-pointer h-[280px] md:h-[350px] lg:h-[290px]"
-                onClick={() => openLightbox(2)}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-bart-black/70 via-bart-black/20 to-transparent z-10" />
-                <img
-                  src={SHOWCASE_IMAGES[2].src}
-                  alt={SHOWCASE_IMAGES[2].title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ objectPosition: '50% 70%' }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-20">
-                  <h3 className="font-serif text-xl md:text-2xl text-white mb-1">
-                    {SHOWCASE_IMAGES[2].title}
-                  </h3>
-                  <p className="font-sans text-white/70 text-sm">
-                    {SHOWCASE_IMAGES[2].description}
-                  </p>
+                  {/* Content overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-[1px] bg-white/50 group-hover:w-12 transition-all duration-500"></div>
+                      <span className="font-sans text-[10px] uppercase tracking-widest text-white/60">Proje</span>
+                    </div>
+                    <h3 className="font-serif text-2xl md:text-3xl text-white mb-2 group-hover:tracking-wide transition-all duration-500">
+                      {image.title}
+                    </h3>
+                    <p className="font-sans text-white/60 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {image.description}
+                    </p>
+                  </div>
+
+                  {/* Corner accent */}
+                  <div className="absolute top-0 right-0 w-20 h-20 z-20">
+                    <div className="absolute top-4 right-4 w-full h-full border-t-2 border-r-2 border-white/0 group-hover:border-white/30 rounded-tr-3xl transition-all duration-500"></div>
+                  </div>
+
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/0 group-hover:bg-white/20 transition-all duration-500 z-20"></div>
                 </div>
-                <div className="hidden md:block absolute inset-3 border border-white/0 group-hover:border-white/30 rounded-lg transition-all duration-500 z-10" />
-              </div>
-            </Reveal>
+              </Reveal>
+            ))}
           </div>
+
+          {/* Bottom decorative text */}
+          <Reveal delay={500}>
+            <div className="mt-20 text-center">
+              <p className="font-serif text-6xl md:text-8xl text-bart-black/5 select-none">
+                B'art Home
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 

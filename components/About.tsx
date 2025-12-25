@@ -65,7 +65,7 @@ const About: React.FC = () => {
                    <path id="curve" d="M 50 50 m -40 0 a 40 40 0 1 1 80 0 a 40 40 0 1 1 -80 0" fill="transparent"/>
                    <text>
                      <textPath href="#curve" className="font-serif text-[9px] uppercase tracking-[0.25em] fill-bart-black">
-                       • 1992'den Beri • Aile İşletmesi •
+                       • 1992'den Beri • Özel Üretim •
                      </textPath>
                    </text>
                  </svg>

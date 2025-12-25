@@ -62,9 +62,9 @@ const Hero: React.FC = () => {
            <div className="relative w-full h-full rounded-t-[200px] rounded-b-[40px] overflow-hidden shadow-2xl animate-float">
              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
              <img
-              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2158&auto=format&fit=crop"
-              alt="Futuristic Interior"
-              className="w-full h-full object-cover grayscale contrast-110 animate-slow-zoom"
+              src="/hero.jpeg"
+              alt="B'art Home - Özel Tasarım Mobilya"
+              className="w-full h-full object-cover"
             />
             
             {/* Floating Glass Cards */}
